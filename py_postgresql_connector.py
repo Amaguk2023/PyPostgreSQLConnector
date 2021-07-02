@@ -150,7 +150,7 @@ def new_db_connection_prompt():
 			print('\nCheck your spelling.')
 			new_connection = False
 
-print('\nAmaguk PostgreSQL Database Connection\n') 
+print('\nAmaguk PostgreSQL Database Connector\n') 
 postgre_database_prompt()
 
 
