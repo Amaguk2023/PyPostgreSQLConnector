@@ -75,7 +75,7 @@ def alter_table_execution(connection):
 			cursor.execute(Alter)  
 			connection.commit() 
 			if (connection):
-				print('Process Completion Succesfull')
+				print('\nProcess Completion Succesfull')
 				new_query_prompt(connection)
 
 		except (psycopg2.errors.SyntaxError, psycopg2.errors.UndefinedTable, psycopg2.errors.InFailedSqlTransaction, psycopg2.extensions.connection, AttributeError, TypeError, psycopg2.ProgrammingError):
