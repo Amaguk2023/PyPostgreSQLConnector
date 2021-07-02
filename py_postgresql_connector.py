@@ -3,14 +3,14 @@ import psycopg2, sys, csv, pandas as pd, openpyxl, socket
 #DATABASE CREDENTIALS PROMPT.
 def postgre_database_prompt():
 	
-	dbname_ = False #Variable is False
+	dbname_ = False 
 	while dbname_ == False:
 	
 		try:
 
-			dbname_ = input('\nDatabase >> ') #Variable is true
+			dbname_ = input('\nDatabase >> ') 
 			user = input('User >> ')
-			host = input('Host >> ') #This is not needed in my case, dunno why
+			host = input('Host >> ') 
 			port = input('Port >> ')
 			postgre_connection(dbname_, user, host, port)
 
@@ -20,13 +20,12 @@ def postgre_database_prompt():
 
 		except (psycopg2.OperationalError, UnboundLocalError):
 			print('\nError while connecting to PostgreSQL, please verify your credentials.\n')
-			dbname_ = False #Back to false and restarts function.
+			dbname_ = False 
 
 #DATABASE CONNECTION.
 def postgre_connection(dbname_, user, host, port):
 	
-	connection = psycopg2.connect(dbname = dbname_ , user = user, host = host, port = port) #postgresql connection.
-
+	connection = psycopg2.connect(dbname = dbname_ , user = user, host = host, port = port) 
 	if (connection): #If the connection is true.
 		print('\nConnected to {} database.'.format(dbname_))
 		query_or_alter_database_prompt(connection)
@@ -54,11 +53,11 @@ def query_execution(connection):
 		try: 
 			
 			Q = input('\nQuery >> ')
-			cursor = connection.cursor() ######################### WE HAVE AN ERROR HERE
-			cursor.execute(Q)  # Executing a SQL query
-			records = cursor.fetchall() #returns tuple 
+			cursor = connection.cursor() 
+			cursor.execute(Q)  
+			records = cursor.fetchall()  
 			new_record = pd.read_sql(Q, connection)
-			header = [i[0] for i in cursor.description] #prints header from the cursor using list comprehension.
+			header = [i[0] for i in cursor.description] 
 			csv_xlsx_prompt(new_record, records, header, connection)	
 
 		except (psycopg2.errors.SyntaxError, psycopg2.errors.UndefinedTable, psycopg2.errors.InFailedSqlTransaction, psycopg2.extensions.connection, AttributeError, TypeError, psycopg2.ProgrammingError):
@@ -71,10 +70,10 @@ def alter_table_execution(connection):
 	while Alter == False:
 		
 		try: 
-			Alter = input('\nAlter >> ') ######################### WE HAVE AN ERROR HERE
+			Alter = input('\nAlter >> ') 
 			cursor = connection.cursor()
-			cursor.execute(Alter)  # Executing a SQL query
-			connection.commit() #Alters database in postgresql
+			cursor.execute(Alter)  
+			connection.commit() 
 			if (connection):
 				print('Process Completion Succesfull')
 				new_query_prompt(connection)
@@ -105,9 +104,9 @@ def csv_creation(records, header, connection):
 
 	file_name = input('\nFile Name >> ') 
 	with open(file_name +'.csv', 'w', newline='') as data:
-		writer = csv.writer(data) # create csv writer object
-		writer.writerow(header) #writes headers to csv
-		for row in records: #iterates through item and adds rows to csv.
+		writer = csv.writer(data) 
+		writer.writerow(header) 
+		for row in records: 
 			writer.writerow(row)
 		
 		print('\ncsv file has been exported.')
@@ -116,9 +115,9 @@ def csv_creation(records, header, connection):
 #XLSX FILE CREATION
 def xlsx_creation(new_record, connection):
 	file_name = input('\nFile Name >> ')
-	writer = pd.ExcelWriter(file_name + '.xlsx') # create excel writer object
-	new_record.to_excel(writer) # write dataframe to excel
-	writer.save() # save the excel
+	writer = pd.ExcelWriter(file_name + '.xlsx') 
+	new_record.to_excel(writer) 
+	writer.save() 
 	print('\nxlsx file has been exported!')
 	new_query_prompt(connection)
 
