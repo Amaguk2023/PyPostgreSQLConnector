@@ -1,4 +1,4 @@
-import psycopg2, sys, csv, pandas as pd, openpyxl, socket
+import psycopg2, sys, csv, pandas as pd
 
 #DATABASE CREDENTIALS PROMPT.
 def postgre_database_prompt():
