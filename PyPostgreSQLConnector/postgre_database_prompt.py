@@ -31,9 +31,6 @@ def postgresql_database_prompt():
 			print('\nError while connecting to PostgreSQL, please verify your credentials.\n')
 			dbname_ = False 
 
-
-
-
 if __name__ == '__main__':			
 	postgresql_database_prompt()
 

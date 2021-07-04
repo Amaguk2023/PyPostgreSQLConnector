@@ -18,7 +18,7 @@ def csv_xlsx_(new_record, records, header, connection, cursor):
 			else:
 				print('\nCheck your spelling.')
 				save_record = False
-
+				
 	except KeyboardInterrupt:
 		print('\nGoodbye!')
 		sys.exit()	
