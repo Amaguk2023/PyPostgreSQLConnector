@@ -6,20 +6,20 @@ import query_alter_prompt
 def postgresql_database_prompt():
 	print('\nAGK PostgreSQL Connector')
 	
-	dbname_ = False #Variable is False
+	dbname_ = False 
 	while dbname_ == False:
 	
 		try:
 
-			dbname_ = input('\nDatabase >> ') #Variable is true
+			dbname_ = input('\nDatabase >> ') 
 			user = input('User >> ')
 			password = input('Password >> ')
-			host = input('Host >> ') #This is not needed in my case, dunno why
+			host = input('Host >> ') 
 			port = input('Port >> ')
 			
-			connection = psycopg2.connect(dbname = dbname_ , user = user, password = password, host = host, port = port) #postgresql connection.
+			connection = psycopg2.connect(dbname = dbname_ , user = user, password = password, host = host, port = port) 
 
-			if (connection): #If the connection is true.
+			if (connection): 
 				print('\nConnected to {} database.'.format(dbname_))
 				query_alter_prompt.query_or_alter_database_prompt(connection)
 
@@ -29,7 +29,7 @@ def postgresql_database_prompt():
 
 		except (psycopg2.OperationalError, UnboundLocalError):
 			print('\nError while connecting to PostgreSQL, please verify your credentials.\n')
-			dbname_ = False #Back to false and restarts function.
+			dbname_ = False 
 
 
 
