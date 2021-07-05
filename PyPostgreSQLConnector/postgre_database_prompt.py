@@ -1,10 +1,14 @@
 import psycopg2, sys
 import query_alter_prompt
+from art import *
 
 
 #DATABASE CREDENTIALS PROMPT.
 def postgresql_database_prompt():
-	print('\nAGK PostgreSQL Connector')
+	def postgresql_database_prompt():
+	tprint('''\n
+		PostgreSQL 
+		Connector''')
 	
 	dbname_ = False 
 	while dbname_ == False:
