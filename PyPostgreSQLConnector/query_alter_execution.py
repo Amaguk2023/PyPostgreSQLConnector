@@ -4,12 +4,9 @@ from new_query_prompt import new_query_alter_prompt
 
 #QUERY PROMPT
 def query_ex(connection):
-
 	Q = False 
-	while Q == False:
-		
+	while not Q:	
 		try: 
-			
 			Q = input('\nQuery >> ')
 			cursor = connection.cursor() 
 			cursor.execute(Q)  
@@ -17,14 +14,10 @@ def query_ex(connection):
 			new_record = pd.read_sql(Q, connection)
 			header = [i[0] for i in cursor.description] 
 			csv_xlsx_prompt.csv_xlsx_(new_record, records, header, connection, cursor)	
-
-		except (psycopg2.errors.SyntaxError, psycopg2.errors.UndefinedTable, psycopg2.errors.InFailedSqlTransaction, psycopg2.errors.SyntaxError):
+		except (psycopg2.errors.SyntaxError, psycopg2.errors.UndefinedTable, psycopg2.errors.InFailedSqlTransaction):
 			print('\nQuery Error.')
 			connection.rollback() 
 			Q = False
-			
-
-
 		except KeyboardInterrupt:
 			print('\nGoodbye!')
 			sys.exit()	
@@ -32,8 +25,7 @@ def query_ex(connection):
 #ALTER TABLE PROMPT
 def alter_table_ex(connection):
 	Alter = False 
-	while Alter == False:
-		
+	while not Alter:
 		try: 
 			Alter = input('\nAlter >> ') 
 			cursor = connection.cursor()
@@ -44,8 +36,6 @@ def alter_table_ex(connection):
 				cursor.close()
 				print('\nCursor closed.')	
 				new_query_alter_prompt(connection)
-				
-
 		except (psycopg2.errors.SyntaxError, psycopg2.errors.UndefinedTable, psycopg2.errors.InFailedSqlTransaction):
 			print('\nQuery Error.')
 			connection.rollback()  

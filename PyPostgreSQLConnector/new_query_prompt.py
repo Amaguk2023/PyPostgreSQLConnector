@@ -5,7 +5,7 @@ import query_alter_prompt, sys
 def new_query_alter_prompt(connection): 
 	try:
 		new_query = False
-		while new_query == False:
+		while not new_query:
 			new_query = input('\nGo back to alter/query prompt? (Y/n) ').lower()
 			if new_query == 'y':
 				query_alter_prompt.query_or_alter_database_prompt(connection)
