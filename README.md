@@ -8,4 +8,4 @@ First module to run  >>  postgre_database_prompt.py
 
 *Upcoming Version*
 
-Will include encrypted connection and better aesthetics. 
+Will include SSL  and better aesthetics. 
