@@ -6,6 +6,3 @@ Extra libraries that must be imported: sys, csv.
 
 First module to run  >>  postgre_database_prompt.py
 
-*Upcoming Version*
-
-Will include SSL  and better aesthetics. 
