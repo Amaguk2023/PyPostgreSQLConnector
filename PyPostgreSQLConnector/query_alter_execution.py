@@ -45,7 +45,7 @@ def alter_table_ex(connection):
 					cursor.close()	
 					new_query_alter_prompt(connection)
 		except (psycopg2.errors.SyntaxError, psycopg2.errors.UndefinedTable, psycopg2.errors.InFailedSqlTransaction):
-			print('\nQuery Error.')
+			print('\nAlteration Error.')
 			connection.rollback()  
 			Alter = False
 			
@@ -55,16 +55,22 @@ def db_creation_ex(connection):
 	datab = False 
 	while not datab:
 		datab = input('\nInsert Database Name >> ')
-		connection.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
-		cursor = connection.cursor()
 		if datab == 'menu':
 				new_query_alter_prompt(connection)
 		else:
+			connection.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+			cursor = connection.cursor()
 			cursor.execute('CREATE DATABASE {dbname}'.format(dbname=datab))
+			connection.commit() 
 			if (connection):
 				print('\nDatabase creation succesfull.')
 				cursor.close()	
 				new_query_alter_prompt(connection)
+			except (psycopg2.errors.SyntaxError, psycopg2.errors.UndefinedTable, psycopg2.errors.InFailedSqlTransaction):
+				print('\nDatabase Creation Error.')
+				connection.rollback()  
+				datab = False
+
 
 
 
