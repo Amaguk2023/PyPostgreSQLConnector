@@ -1,10 +1,18 @@
 # PyPostgreSQLConnector
 
-PostgreSQL Connector, used for  querying and table altering. Program exports queries as .csv or .xlsx files into the user's pwd. 
+***Program Features:*** 
+- Querying
+- Database Altering
+- Database Creation 
+- Query Exporter (csv/xlsx)  
 
-Extra libraries that must be imported: sys, csv. 
+***Recent Additions:***
+- Database Creation
+- SSL Connection
 
-Program execution:
+***Essentials:***
+- Extra libraries that must be imported: sys, csv. 
 
+***Program Execution:***
 - python PyPostgreSQLConnector
 
