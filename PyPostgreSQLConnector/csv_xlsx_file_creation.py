@@ -12,7 +12,6 @@ def csv_ction(records, header, connection, cursor):
 				writer.writerow(row)
 			print('\ncsv file has been exported.')
 			cursor.close()
-			print('\nCursor closed.')
 			new_query_alter_prompt(connection)
 	except KeyboardInterrupt:
 		print('\nGoodbye!')
@@ -27,7 +26,6 @@ def xlsx_ction(new_record, connection, cursor):
 		writer.save() 
 		print('\nxlsx file has been exported!')
 		cursor.close()
-		print('\nCursor closed.')
 		new_query_alter_prompt(connection)
 	except KeyboardInterrupt:
 		print('\nGoodbye!')

@@ -1,17 +1,16 @@
-import postgre_database_prompt, sys
+import __main__, sys
 
 #NEW DB CONNECTION PROMPT
-def new_db_connection_prompt(connection):
+def new_db_connection_prompt():
 	try:
 		new_connection = False 
 		while not new_connection: 
 			new_connection = input('\nNew Database connection? (Y/n) ').lower()
 			if new_connection == 'y':
-				connection.close()
-				postgre_database_prompt.postgresql_database_prompt()
+				__main__.postgresql_database_prompt()
 			elif new_connection == 'n':
-				connection.close()
 				print('\nGoodbye!\n')
+				sys.exit()
 			else:
 				print('\nCheck your spelling.')
 				new_connection = False
